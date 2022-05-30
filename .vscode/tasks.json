@@ -9,7 +9,9 @@
                 "-o",
                 "${fileDirname}/out/${fileBasenameNoExtension}.html",
                 "-s",
-                "USE_SDL=2"
+                "USE_SDL=2",
+                "-s",
+                "ASYNCIFY"
             ],
             "options": {
                 "cwd": "${fileDirname}"
