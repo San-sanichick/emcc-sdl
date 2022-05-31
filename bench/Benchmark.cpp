@@ -1,9 +1,30 @@
 #include "Benchmark.h"
 #include <iostream>
+#include "Shapes/Rect.h"
+#include "utils/MarhUtils.h"
 
 Benchmark::Benchmark() {
+    _settings = BenchSettings {
+        0,
+        0,
+        0
+    };
+
+    width  = 800;
+    height = 800;
+
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(512, 512, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
+}
+
+Benchmark::Benchmark(BenchSettings &settings) {
+    _settings = settings;
+
+    width  = 800;
+    height = 800;
+
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
 }
 
 Benchmark::~Benchmark()  {
@@ -14,7 +35,17 @@ Benchmark::~Benchmark()  {
 }
 
 bool Benchmark::init() {
-    std::cout << "Lol" << std::endl;
+    for (int i = 0; i < _settings.rectangles; i++) {
+        std::shared_ptr<Rect> r (new Rect(
+            randomInRange(0, width), 
+            randomInRange(0, height), 
+            randomInRange(10, 50),
+            randomInRange(10, 50)
+        ));
+
+        _drawables.push_back(r);
+    }
+
     return true;
 }
 
@@ -24,10 +55,9 @@ void Benchmark::render() {
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
-    // draw a rectangle
-    SDL_Rect filledRectangle = { 20, 20, 320, 240 };
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(renderer, &filledRectangle);
+    for (int i = 0; i < _drawables.size(); i++) {
+        _drawables[i].get()->render(renderer);
+    }
 
     SDL_RenderPresent(renderer);
     std::cout << "Rendering" << std::endl;
