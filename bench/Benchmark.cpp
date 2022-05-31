@@ -51,6 +51,18 @@ bool Benchmark::init() {
     return true;
 }
 
+void Benchmark::loop() {
+    // uint64_t oldTime = SDL_GetTicks64();
+
+    update();
+    render();
+
+    // uint64_t elapsed = (SDL_GetTicks64() - oldTime);
+    // float fps = (elapsed > 0) ? (1000.0f / elapsed) : 0.0f;
+
+    // std::cout << "elapsed: " << elapsed << ", fps: " << (int)fps << std::endl;
+}
+
 bool Benchmark::initSDL() {
     return (SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND) != -1);
 }
@@ -58,22 +70,24 @@ bool Benchmark::initSDL() {
 void Benchmark::update() {
     for (auto ePtr : _drawables) {
         ePtr.get()->update(
-            randomInRange(-2, 2),
-            randomInRange(-2, 2)
+            ePtr.get()->getPos().getX() + randomInRange(-2, 2),
+            ePtr.get()->getPos().getY() + randomInRange(-2, 2)
         );
     }
 }
 
 void Benchmark::render() {
     // clear screen
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
 
     for (int i = 0; i < _drawables.size(); i++) {
         _drawables[i].get()->render(renderer);
     }
 
     SDL_RenderPresent(renderer);
-    std::cout << "Rendering" << std::endl;
 }
+
+// void Benchmark::renderFPS(uint16_t frameTime) {
+    
+// }

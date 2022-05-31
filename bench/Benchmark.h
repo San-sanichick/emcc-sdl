@@ -13,15 +13,15 @@ struct BenchSettings {
         textLabels = 0;
     }
 
-    BenchSettings(uint16_t _rectangles, uint16_t _circles, uint16_t _textlabels) {
+    BenchSettings(uint32_t _rectangles, uint32_t _circles, uint32_t _textlabels) {
         rectangles = _rectangles;
         circles    = _circles;
         textLabels = _textlabels;
     }
 
-    uint16_t rectangles;
-    uint16_t circles;
-    uint16_t textLabels;
+    uint32_t rectangles;
+    uint32_t circles;
+    uint32_t textLabels;
 };
 
 class Benchmark {
@@ -32,12 +32,13 @@ public:
     ~Benchmark();
 
     bool init();
-
-    void update();
     void render();
+    void loop();
 
 private:
     bool initSDL();
+    void update();
+    // void renderFPS(uint16_t frameTime);
 
 private:
     uint16_t width;

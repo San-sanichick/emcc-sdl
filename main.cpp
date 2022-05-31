@@ -4,41 +4,36 @@
 #include <emscripten.h>
 #endif
 
-void doLoop(void *voidFnPtr) {
-    auto *fnPtr = reinterpret_cast<std::function<void()>*>(voidFnPtr);
-
-    if (fnPtr) {
-        auto &fn = *fnPtr;
-        fn(); 
-    }
+void loop(void* arg) {
+    static_cast<Benchmark*>(arg)->loop();
 }
 
 int main() {
     printf("hello world\n");
 
     BenchSettings settings {
-        (uint16_t)100,
-        (uint16_t)0,
-        (uint16_t)0
+        8000,
+        0,
+        0
     };
 
     Benchmark bench(settings);
 
     if (bench.init()) {
         bench.render();
-    }
-
-    auto loop = [&bench]() {
-        bench.update();
-        bench.render();
-    };
 
 #ifdef __EMSCRIPTEN__
-    // emscripten_sleep(10000);
-    emscripten_set_main_loop_arg(doLoop, &loop, 0, 1);
+        // we can't exactly use an infinite while loop in a browser, so we use this
+        emscripten_set_main_loop_arg(&loop, &bench, 0, 1);
 #else
-    SDL_Delay(10000);
+        while(true) {
+            bench.update();
+            bench.render();
+            // SDL_Delay(100);
+        }
 #endif
+    }
+
 
     return 0;
 }
