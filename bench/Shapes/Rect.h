@@ -11,14 +11,18 @@ public:
     }
 
     void render(SDL_Renderer *renderer) {
-        SDL_Rect filledRectangle = { 
+        SDL_Rect rect = { 
             (int)(pos.getX()), 
             (int)(pos.getY()), 
             (int)(pos.getX() + _w),
             (int)(pos.getY() + _w) };
         
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &filledRectangle);
+
+        SDL_SetRenderDrawColor(renderer, 200, 0, 0, 150);
+        SDL_RenderFillRect(renderer, &rect);
+
+        SDL_SetRenderDrawColor(renderer, 0, 150, 0, 255);
+        SDL_RenderDrawRect(renderer, &rect);
     }
 
 private:
