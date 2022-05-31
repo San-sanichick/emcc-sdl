@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "bench/Benchmark.h"
 
 #ifdef __EMSCRIPTEN__

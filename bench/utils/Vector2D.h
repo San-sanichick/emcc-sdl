@@ -18,17 +18,6 @@ public:
         _y = v2._y;
     }
 
-    // Vector2D(Vector2D &&o)
-    //     : _x(0)
-    //     , _y(0)
-    // {
-    //     _x = o._x;
-    //     _y = o._y;
-
-    //     o._x = 0;
-    //     o._y = 0;
-    // }
-
     Vector2D& operator+=(const Vector2D &v2) {
         _x += v2._x;
         _y += v2._y;

@@ -7,7 +7,6 @@
             "args": [
                 "-g",
                 "-std=c++20",
-                // "${file}",
                 "${workspaceFolder}/*.cpp",
                 "${workspaceFolder}/bench/*.cpp",
                 "-o",
