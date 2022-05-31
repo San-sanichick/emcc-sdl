@@ -15,7 +15,9 @@
                 "-s",
                 "USE_SDL=2",
                 "-s",
-                "ASYNCIFY"
+                "ASSERTIONS"
+                // "-s",
+                // "ALLOW_MEMORY_GROWTH"
             ],
             "options": {
                 "cwd": "${fileDirname}"
