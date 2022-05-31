@@ -2,10 +2,14 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: emcc.py build active file",
+            "label": "C/C++: emcc build active file",
             "command": "/home/sansanichick/emsdk/upstream/emscripten/emcc.py",
             "args": [
-                "${file}",
+                "-g",
+                "-std=c++20",
+                // "${file}",
+                "${workspaceFolder}/*.cpp",
+                "${workspaceFolder}/bench/*.cpp",
                 "-o",
                 "${fileDirname}/out/${fileBasenameNoExtension}.html",
                 "-s",
