@@ -33,7 +33,11 @@ public:
 
     bool init();
 
+    void update();
     void render();
+
+private:
+    bool initSDL();
 
 private:
     uint16_t width;

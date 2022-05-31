@@ -46,12 +46,27 @@ bool Benchmark::init() {
         _drawables.push_back(r);
     }
 
+    initSDL();
+
     return true;
+}
+
+bool Benchmark::initSDL() {
+    return (SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND) != -1);
+}
+
+void Benchmark::update() {
+    for (auto ePtr : _drawables) {
+        ePtr.get()->update(
+            randomInRange(-2, 2),
+            randomInRange(-2, 2)
+        );
+    }
 }
 
 void Benchmark::render() {
     // clear screen
-    SDL_SetRenderDrawColor(renderer, 0, 200, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
