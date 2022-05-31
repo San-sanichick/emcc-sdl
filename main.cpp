@@ -7,10 +7,18 @@
 
 int main() {
     printf("hello world\n");
-    Benchmark bench;
 
-    bench.init();
-    bench.render();
+    BenchSettings settings {
+        (uint16_t)100,
+        (uint16_t)0,
+        (uint16_t)0
+    };
+
+    Benchmark bench(settings);
+
+    if (bench.init()) {
+        bench.render();
+    }
 
 #ifdef __EMSCRIPTEN__
     emscripten_sleep(10000);
