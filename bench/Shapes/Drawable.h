@@ -1,5 +1,4 @@
-#ifndef DRAWABLE_H
-#define DRAWABLE_H
+#pragma once
 
 #include "../utils/Vector2D.h"
 #include <SDL2/SDL.h>
@@ -16,5 +15,3 @@ public:
 protected:
     Vector2D pos;
 };
-
-#endif /* DRAWABLE_H */

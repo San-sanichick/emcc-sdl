@@ -1,23 +1,11 @@
 #include "Benchmark.h"
 #include <iostream>
+#include <emscripten/bind.h>
+
 #include "Shapes/Rect.h"
-#include "utils/MarhUtils.h"
+#include "utils/Math.h"
 
-Benchmark::Benchmark() {
-    _settings = BenchSettings {
-        0,
-        0,
-        0
-    };
-
-    width  = 800;
-    height = 800;
-
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
-}
-
-Benchmark::Benchmark(BenchSettings &settings) {
+Benchmark::Benchmark(BenchSettings settings) {
     _settings = settings;
 
     width  = 800;
@@ -91,3 +79,17 @@ void Benchmark::render() {
 // void Benchmark::renderFPS(uint16_t frameTime) {
     
 // }
+
+
+EMSCRIPTEN_BINDINGS(my_module) {
+    emscripten::value_object<BenchSettings>("BenchSettings")
+        .field("rectangles", &BenchSettings::rectangles)
+        .field("circles", &BenchSettings::circles)
+        .field("textLabels", &BenchSettings::textLabels);
+
+    emscripten::class_<Benchmark>("Becnhmark")
+        .constructor<BenchSettings>()
+        .function("init", &Benchmark::init)
+        .function("render", &Benchmark::render)
+        .function("loop", &Benchmark::loop);
+}

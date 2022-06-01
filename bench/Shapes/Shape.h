@@ -1,5 +1,4 @@
-#ifndef SHAPE_H
-#define SHAPE_H
+#pragma once
 
 #include "Drawable.h"
 
@@ -19,5 +18,3 @@ public:
         return pos;
     }
 };
-
-#endif /* SHAPE_H */

@@ -1,5 +1,4 @@
-#ifndef BENCHMARK_H
-#define BENCHMARK_H
+#pragma once
 
 #include <stdint.h>
 #include <vector>
@@ -26,8 +25,7 @@ struct BenchSettings {
 
 class Benchmark {
 public:
-    Benchmark();
-    Benchmark(BenchSettings &settings);
+    Benchmark(BenchSettings settings);
 
     ~Benchmark();
 
@@ -51,5 +49,3 @@ private:
 
     std::vector<std::shared_ptr<Drawable>> _drawables;
 };
-
-#endif
