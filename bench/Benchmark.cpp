@@ -1,6 +1,5 @@
 #include "Benchmark.h"
 #include <iostream>
-#include <emscripten/bind.h>
 
 #include "Shapes/Rect.h"
 #include "utils/Math.h"
@@ -51,6 +50,16 @@ void Benchmark::loop() {
     // std::cout << "elapsed: " << elapsed << ", fps: " << (int)fps << std::endl;
 }
 
+void _loop(void* arg) {
+    static_cast<Benchmark*>(arg)->loop();
+}
+
+void Benchmark::startLoop() {
+#ifdef __EMSCRIPTEN__
+    emscripten_set_main_loop_arg(&_loop, this, 0, 1);
+#endif
+}
+
 bool Benchmark::initSDL() {
     return (SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND) != -1);
 }
@@ -79,17 +88,3 @@ void Benchmark::render() {
 // void Benchmark::renderFPS(uint16_t frameTime) {
     
 // }
-
-
-EMSCRIPTEN_BINDINGS(my_module) {
-    emscripten::value_object<BenchSettings>("BenchSettings")
-        .field("rectangles", &BenchSettings::rectangles)
-        .field("circles", &BenchSettings::circles)
-        .field("textLabels", &BenchSettings::textLabels);
-
-    emscripten::class_<Benchmark>("Becnhmark")
-        .constructor<BenchSettings>()
-        .function("init", &Benchmark::init)
-        .function("render", &Benchmark::render)
-        .function("loop", &Benchmark::loop);
-}

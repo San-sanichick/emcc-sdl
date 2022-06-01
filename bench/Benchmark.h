@@ -1,5 +1,7 @@
 #pragma once
 
+#include <emscripten/bind.h>
+#include <emscripten.h>
 #include <stdint.h>
 #include <vector>
 #include <SDL2/SDL.h>
@@ -33,6 +35,8 @@ public:
     void render();
     void loop();
 
+    void startLoop();
+
 private:
     bool initSDL();
     void update();
@@ -49,3 +53,17 @@ private:
 
     std::vector<std::shared_ptr<Drawable>> _drawables;
 };
+
+EMSCRIPTEN_BINDINGS(my_module) {
+    emscripten::value_object<BenchSettings>("BenchSettings")
+        .field("rectangles", &BenchSettings::rectangles)
+        .field("circles", &BenchSettings::circles)
+        .field("textLabels", &BenchSettings::textLabels);
+
+    emscripten::class_<Benchmark>("Benchmark")
+        .constructor<BenchSettings>()
+        .function("init", &Benchmark::init)
+        .function("render", &Benchmark::render)
+        .function("startLoop", &Benchmark::startLoop)
+        .function("loop", &Benchmark::loop);
+}

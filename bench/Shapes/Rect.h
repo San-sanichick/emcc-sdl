@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Shape.h"
-#include <SDL2/SDL.h>
 
 class Rect : public Shape {
 public:
