@@ -1,7 +1,10 @@
 #pragma once
 
+#ifdef __EMSCRIPTEN__
 #include <emscripten/bind.h>
 #include <emscripten.h>
+#endif
+
 #include <stdint.h>
 #include <vector>
 #include <SDL2/SDL.h>
@@ -54,6 +57,7 @@ private:
     std::vector<std::shared_ptr<Drawable>> _drawables;
 };
 
+#ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(my_module) {
     emscripten::value_object<BenchSettings>("BenchSettings")
         .field("rectangles", &BenchSettings::rectangles)
@@ -67,3 +71,4 @@ EMSCRIPTEN_BINDINGS(my_module) {
         .function("startLoop", &Benchmark::startLoop)
         .function("loop", &Benchmark::loop);
 }
+#endif
