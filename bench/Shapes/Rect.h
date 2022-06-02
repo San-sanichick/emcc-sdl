@@ -13,10 +13,10 @@ public:
 
     void render(SDL_Renderer *renderer) {
         SDL_Rect rect = { 
-            (int)(pos.getX()), 
-            (int)(pos.getY()), 
-            (int)(pos.getX() + _w),
-            (int)(pos.getY() + _w) };
+            (int)(pos.x), 
+            (int)(pos.y), 
+            (int)(pos.x + _w),
+            (int)(pos.y + _w) };
         
 
         SDL_SetRenderDrawColor(renderer, 200, 0, 0, 150);

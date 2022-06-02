@@ -10,8 +10,8 @@ public:
     virtual void update(int64_t newX, int64_t newY) = 0;
     virtual void render(SDL_Renderer *renderer) = 0;
 
-    virtual Vector2D getPos() = 0;
+    virtual Vector2D<int64_t> getPos() = 0;
 
 protected:
-    Vector2D pos;
+    Vector2D<int64_t> pos;
 };
