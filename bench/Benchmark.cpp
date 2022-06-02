@@ -55,9 +55,11 @@ void _loop(void* arg) {
 }
 
 void Benchmark::startLoop() {
-// #ifdef __EMSCRIPTEN__
-//     emscripten_set_main_loop_arg(&_loop, this, 0, 1);
-// #endif
+#ifndef BUILD_MAIN
+#ifdef __EMSCRIPTEN__
+    emscripten_set_main_loop_arg(&_loop, this, 0, 1);
+#endif
+#endif
 }
 
 bool Benchmark::initSDL() {
