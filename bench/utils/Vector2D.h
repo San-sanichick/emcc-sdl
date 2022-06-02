@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-#include <algorithm>
 
 template<class T>
 class Vector2D {
