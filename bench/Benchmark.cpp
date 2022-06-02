@@ -55,9 +55,9 @@ void _loop(void* arg) {
 }
 
 void Benchmark::startLoop() {
-#ifdef __EMSCRIPTEN__
-    emscripten_set_main_loop_arg(&_loop, this, 0, 1);
-#endif
+// #ifdef __EMSCRIPTEN__
+//     emscripten_set_main_loop_arg(&_loop, this, 0, 1);
+// #endif
 }
 
 bool Benchmark::initSDL() {
@@ -67,8 +67,8 @@ bool Benchmark::initSDL() {
 void Benchmark::update() {
     for (auto ePtr : _drawables) {
         ePtr.get()->update(
-            ePtr.get()->getPos().getX() + randomInRange(-2, 2),
-            ePtr.get()->getPos().getY() + randomInRange(-2, 2)
+            ePtr.get()->getPos().x + randomInRange(-2, 2),
+            ePtr.get()->getPos().y + randomInRange(-2, 2)
         );
     }
 }
@@ -84,7 +84,3 @@ void Benchmark::render() {
 
     SDL_RenderPresent(renderer);
 }
-
-// void Benchmark::renderFPS(uint16_t frameTime) {
-    
-// }

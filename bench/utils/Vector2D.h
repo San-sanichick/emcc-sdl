@@ -23,7 +23,6 @@ public:
 
     // Vector2D& operator=(Vector2D &o) = default;
 
-
 public:
     T x;
     T y;

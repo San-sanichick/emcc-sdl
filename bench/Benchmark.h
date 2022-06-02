@@ -1,8 +1,14 @@
 #pragma once
 
-#ifdef __EMSCRIPTEN__
-#include <emscripten/bind.h>
-#include <emscripten.h>
+#ifndef BUILD_MAIN
+    #ifdef __EMSCRIPTEN__
+    #include <emscripten.h>
+    #include <emscripten/bind.h>
+    #endif
+#else
+    #ifdef __EMSCRIPTEN__
+    #include <emscripten.h>
+    #endif
 #endif
 
 #include <stdint.h>
@@ -57,6 +63,7 @@ private:
     std::vector<std::shared_ptr<Drawable>> _drawables;
 };
 
+#ifndef BUILD_MAIN
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(my_module) {
     emscripten::value_object<BenchSettings>("BenchSettings")
@@ -71,4 +78,5 @@ EMSCRIPTEN_BINDINGS(my_module) {
         .function("startLoop", &Benchmark::startLoop)
         .function("loop", &Benchmark::loop);
 }
+#endif
 #endif

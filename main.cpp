@@ -1,6 +1,6 @@
-#include "bench/Benchmark.h"
+#define BUILD_MAIN 1
 
-// #define BUILD_MAIN 1
+#include "bench/Benchmark.h"
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
