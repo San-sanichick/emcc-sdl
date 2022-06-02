@@ -6,7 +6,7 @@
             "command": "/home/sansanichick/emsdk/upstream/emscripten/emcc.py",
             "args": [
                 "-O2",
-                "-g",
+                "-g0",
                 "-std=c++20",
                 "${workspaceFolder}/*.cpp",
                 "${workspaceFolder}/bench/*.cpp",
@@ -34,7 +34,7 @@
             "command": "/home/sansanichick/emsdk/upstream/emscripten/emcc.py",
             "args": [
                 "-O3",
-                "-g",
+                "-g0",
                 "-std=c++20",
                 "-lembind",
                 "-o",
