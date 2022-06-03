@@ -4,29 +4,16 @@
 
 class Rect : public Shape {
 public:
-    Rect(int64_t x, int64_t y, int64_t w, int64_t h) 
+    Rect(int64_t x, int64_t y, int64_t _w, int64_t _h) 
     : Shape(x, y)
+    , w(_w)
+    , h(_h)
     {
-        _w = w;
-        _h = h;
     }
 
-    void render(SDL_Renderer *renderer) {
-        SDL_Rect rect = { 
-            (int)(pos.x), 
-            (int)(pos.y), 
-            (int)(pos.x + _w),
-            (int)(pos.y + _w) };
-        
-
-        SDL_SetRenderDrawColor(renderer, 200, 0, 0, 150);
-        SDL_RenderFillRect(renderer, &rect);
-
-        SDL_SetRenderDrawColor(renderer, 0, 150, 0, 255);
-        SDL_RenderDrawRect(renderer, &rect);
-    }
+    void render(SDL_Renderer *renderer) override;
 
 private:
-    int64_t _w;
-    int64_t _h;
+    int64_t w;
+    int64_t h;
 };
