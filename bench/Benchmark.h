@@ -36,7 +36,7 @@ struct BenchSettings {
 
 class Benchmark {
 public:
-    Benchmark(BenchSettings settings);
+    Benchmark(BenchSettings &settings);
 
     ~Benchmark();
 

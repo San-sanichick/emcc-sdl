@@ -4,7 +4,7 @@
 #include "Shapes/Rect.h"
 #include "utils/Math.h"
 
-Benchmark::Benchmark(BenchSettings settings) {
+Benchmark::Benchmark(BenchSettings &settings) {
     _settings = settings;
 
     width  = 800;
