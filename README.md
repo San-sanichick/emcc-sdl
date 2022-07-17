@@ -124,7 +124,7 @@ The most important parts here are **intelliSenseMode**, **compilerPath**, **cppS
 Emscripten uses Clang under the hood, so we choose "linux-clang-x64" as the mode.
 
 ### compilerPath
-Here we need to put our path to the compiler. Emscripten compiler is python file (yea), and it is located in the "upstream" directory of the repo that you've cloned. 
+Here we need to put our path to the compiler. Emscripten compiler is a python file (yea), and it is located in the "upstream" directory of the repo that you've cloned. 
 
 ### cppStandard
 Version of C++ that IntelliSense™ is going to use. Be vary that Clang [didn't fully implement C++20 standart yet](https://clang.llvm.org/cxx_status.html), and stuff like modules doesn't fully bloody work even with -fmodules argument, at least it doesn't for me.
