@@ -2,9 +2,10 @@
 #include <iostream>
 
 #include "Shapes/Rect.h"
+#include "Shapes/Circle.h"
 #include "utils/Math.h"
 
-Benchmark::Benchmark(BenchSettings &settings) {
+Benchmark::Benchmark(BenchSettings settings) {
     _settings = settings;
 
     width  = 800;
@@ -31,6 +32,16 @@ bool Benchmark::init() {
         ));
 
         _drawables.push_back(r);
+    }
+
+    for (int i = 0; i < _settings.circles; i++) {
+        std::shared_ptr<Circle> c (new Circle(
+            randomInRange(0, width), 
+            randomInRange(0, height), 
+            randomInRange(10, 50)
+        ));
+
+        _drawables.push_back(c);
     }
 
     initSDL();
